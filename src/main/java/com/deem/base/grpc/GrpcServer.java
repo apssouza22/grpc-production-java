@@ -26,8 +26,9 @@ public class GrpcServer {
     }
 
     private void cleanup() {
-        this.server.shutdown();
+        LOG.warning("GRPC server shutting down");
         try {
+            this.server.shutdown();
             this.server.awaitTermination();
         } catch (InterruptedException e) {
             LOG.warning("GRPC server shutdown error.");

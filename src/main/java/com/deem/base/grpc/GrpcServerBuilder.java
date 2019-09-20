@@ -5,16 +5,11 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
 import java.util.List;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class GrpcServerBuilder {
 
-    private int port;
-    private Executor executor;
-    private List<BindableService> services;
     private ServerBuilder<?> serverBuilder;
-
 
     public static GrpcServerBuilder port(int port) {
         GrpcServerBuilder grpcServerBuilder = new GrpcServerBuilder();
@@ -33,7 +28,6 @@ public class GrpcServerBuilder {
     }
 
     public GrpcServer build() {
-        serverBuilder.executor(executor);
         Server server = serverBuilder.build();
         return new GrpcServer(server);
     }
