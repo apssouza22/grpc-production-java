@@ -8,6 +8,7 @@ import io.grpc.BindableService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -18,6 +19,7 @@ public class Main {
         GrpcServerBuilder builder = GrpcServerBuilder.port(5051);
         GrpcServer grpcServer = builder.services(services)
                 .fixedThreadPool(4)
+                .maxConnectionAge(5, TimeUnit.MINUTES)
                 .build();
         grpcServer.start();
     }
