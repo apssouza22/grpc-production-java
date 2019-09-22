@@ -1,9 +1,10 @@
-package com.deem.base.grpc;
+package com.apssouza.server.grpc;
 
 
 import io.grpc.Server;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public class GrpcServer {
@@ -29,7 +30,7 @@ public class GrpcServer {
         LOG.warning("GRPC server shutting down");
         try {
             this.server.shutdown();
-            this.server.awaitTermination();
+            this.server.awaitTermination(5, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             LOG.warning("GRPC server shutdown error.");
         }

@@ -1,4 +1,4 @@
-package com.deem.base.grpc;
+package com.apssouza.server.grpc;
 
 import io.grpc.BindableService;
 import io.grpc.Server;

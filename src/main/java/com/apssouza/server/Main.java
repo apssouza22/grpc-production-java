@@ -1,8 +1,8 @@
-package com.deem.base;
+package com.apssouza.server;
 
-import com.deem.base.grpc.GrpcServer;
-import com.deem.base.grpc.GrpcServerBuilder;
-import com.deem.base.grpc.HealthCheckService;
+import com.apssouza.server.grpc.GrpcServer;
+import com.apssouza.server.grpc.GrpcServerBuilder;
+import com.apssouza.server.grpc.HealthCheckService;
 import io.grpc.BindableService;
 
 import java.io.IOException;
