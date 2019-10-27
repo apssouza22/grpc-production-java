@@ -1,4 +1,4 @@
-package com.apssouza.server.grpc;
+package com.apssouza.grpc.server;
 
 import io.grpc.health.v1.HealthCheckRequest;
 import io.grpc.health.v1.HealthCheckResponse;

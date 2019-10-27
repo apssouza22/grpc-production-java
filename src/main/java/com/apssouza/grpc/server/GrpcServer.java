@@ -1,11 +1,11 @@
-package com.apssouza.server.grpc;
+package com.apssouza.grpc.server;
 
-
-import io.grpc.Server;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
+
+import io.grpc.Server;
 
 public class GrpcServer {
     private static Logger LOG = Logger.getLogger(GrpcServer.class.getName());
@@ -18,7 +18,7 @@ public class GrpcServer {
     public void start() throws IOException, InterruptedException {
         registerShutDownListener();
         this.server.start();
-        LOG.info("GRPC server stated");
+        LOG.info("GRPC server stated on port=" + server.getPort());
         server.awaitTermination();
     }
 

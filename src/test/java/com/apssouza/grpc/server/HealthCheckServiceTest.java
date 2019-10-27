@@ -1,4 +1,11 @@
-package com.apssouza.server.grpc;
+package com.apssouza.grpc.server;
+
+import org.assertj.core.api.Assertions;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+
+import java.io.IOException;
 
 import io.grpc.ManagedChannel;
 import io.grpc.Server;
@@ -8,15 +15,8 @@ import io.grpc.health.v1.HealthGrpc;
 import io.grpc.inprocess.InProcessChannelBuilder;
 import io.grpc.inprocess.InProcessServerBuilder;
 import io.grpc.testing.GrpcCleanupRule;
-import org.junit.Rule;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-
-
-class HealthCheckServiceTest {
+public class HealthCheckServiceTest {
 
     /**
      * This rule manages automatic graceful shutdown for the registered servers and channels at the
@@ -30,14 +30,14 @@ class HealthCheckServiceTest {
      */
     private String serverName;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         // Generate a unique in-process server name.
         this.serverName = InProcessServerBuilder.generateName();
     }
 
     @Test
-    void check() throws IOException {
+    public void check() throws IOException {
         Server server = InProcessServerBuilder
                 .forName(serverName)
                 .directExecutor()
@@ -58,6 +58,6 @@ class HealthCheckServiceTest {
         HealthCheckRequest healthCheckRequest = HealthCheckRequest.newBuilder().build();
         HealthCheckResponse response = healthBlockingStub.check(healthCheckRequest);
 
-        Assertions.assertEquals(response.getStatus(),HealthCheckResponse.ServingStatus.SERVING);
+        Assertions.assertThat(response.getStatus()).isEqualTo(HealthCheckResponse.ServingStatus.SERVING);
     }
 }

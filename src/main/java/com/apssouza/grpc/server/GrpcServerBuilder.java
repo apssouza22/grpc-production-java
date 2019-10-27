@@ -1,12 +1,13 @@
-package com.apssouza.server.grpc;
-
-import io.grpc.BindableService;
-import io.grpc.Server;
-import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
+package com.apssouza.grpc.server;
 
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+
+import io.grpc.BindableService;
+import io.grpc.Server;
+import io.grpc.ServerInterceptor;
+import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
 
 public class GrpcServerBuilder {
 
@@ -50,10 +51,28 @@ public class GrpcServerBuilder {
         return this;
     }
 
+    /**
+     * Set a list of services
+     *
+     * @param services
+     * @return
+     */
     public GrpcServerBuilder services(final List<BindableService> services) {
         services.forEach(serverBuilder::addService);
         return this;
     }
+
+    /**
+     * Set a list of interceptors
+     *
+     * @param interceptors
+     * @return
+     */
+    public GrpcServerBuilder interceptors(final List<ServerInterceptor> interceptors) {
+        interceptors.forEach(serverBuilder::intercept);
+        return this;
+    }
+
 
     public GrpcServer build() {
         Server server = serverBuilder.build();
