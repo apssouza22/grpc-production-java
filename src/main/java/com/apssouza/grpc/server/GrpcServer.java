@@ -1,8 +1,10 @@
 package com.apssouza.grpc.server;
 
 
+import com.apssouza.grpc.utils.ShutdownHelper;
+
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 import java.util.logging.Logger;
 
 import io.grpc.Server;
@@ -28,12 +30,7 @@ public class GrpcServer {
 
     private void cleanup() {
         LOG.warning("GRPC server shutting down");
-        try {
-            this.server.shutdown();
-            this.server.awaitTermination(5, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            LOG.warning("GRPC server shutdown error.");
-        }
+        ShutdownHelper.shutdownWithJvm(this.server, Duration.ofMillis(5).toMillis());
     }
 
 }

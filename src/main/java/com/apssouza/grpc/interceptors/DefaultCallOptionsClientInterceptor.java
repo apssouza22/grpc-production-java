@@ -97,13 +97,23 @@ public class DefaultCallOptionsClientInterceptor implements ClientInterceptor {
         patchedOptions = patchOption(patchedOptions, CallOptions::getCredentials, CallOptions::withCallCredentials);
         patchedOptions = patchOption(patchedOptions, CallOptions::getCompressor, CallOptions::withCompression);
         patchedOptions = patchOption(patchedOptions, CallOptions::getDeadline, CallOptions::withDeadline);
-        patchedOptions = patchOption(patchedOptions, CallOptions::isWaitForReady,
-                (callOptions, waitForReady) -> waitForReady ? callOptions.withWaitForReady() : callOptions
-                        .withoutWaitForReady());
-        patchedOptions = patchOption(patchedOptions, CallOptions::getMaxInboundMessageSize,
-                CallOptions::withMaxInboundMessageSize);
-        patchedOptions = patchOption(patchedOptions, CallOptions::getMaxOutboundMessageSize,
-                CallOptions::withMaxOutboundMessageSize);
+        patchedOptions = patchOption(
+                patchedOptions,
+                CallOptions::isWaitForReady,
+                (callOptions, waitForReady) -> waitForReady ?
+                        callOptions.withWaitForReady() :
+                        callOptions.withoutWaitForReady()
+        );
+        patchedOptions = patchOption(
+                patchedOptions,
+                CallOptions::getMaxInboundMessageSize,
+                CallOptions::withMaxInboundMessageSize
+        );
+        patchedOptions = patchOption(
+                patchedOptions,
+                CallOptions::getMaxOutboundMessageSize,
+                CallOptions::withMaxOutboundMessageSize
+        );
         patchedOptions = patchOption(patchedOptions, CallOptions::getExecutor, CallOptions::withExecutor);
 
         for (ClientStreamTracer.Factory factory : defaultOptions.getStreamTracerFactories()) {

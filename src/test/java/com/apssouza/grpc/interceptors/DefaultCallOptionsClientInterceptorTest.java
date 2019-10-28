@@ -45,8 +45,8 @@ public class DefaultCallOptionsClientInterceptorTest {
 
     @Test
     public void customKeyTransfers() {
-        CallOptions.Key<String> k1 = CallOptions.Key.of("k1", null);
-        CallOptions.Key<String> k2 = CallOptions.Key.of("k2", null);
+        CallOptions.Key<String> k1 = CallOptions.Key.createWithDefault("k1", null);
+        CallOptions.Key<String> k2 = CallOptions.Key.createWithDefault("k2", null);
 
         CallOptions baseOptions = CallOptions.DEFAULT.withOption(k1, "FOO");
         CallOptions defaultOptions = CallOptions.DEFAULT.withOption(k2, "BAR");
@@ -73,9 +73,9 @@ public class DefaultCallOptionsClientInterceptorTest {
 
     @Test
     public void noOverwriteWorksCustomKeys() {
-        CallOptions.Key<String> k1 = CallOptions.Key.of("k1", null);
-        CallOptions.Key<String> k2 = CallOptions.Key.of("k2", null);
-        CallOptions.Key<String> k3 = CallOptions.Key.of("k3", null);
+        CallOptions.Key<String> k1 = CallOptions.Key.createWithDefault("k1", null);
+        CallOptions.Key<String> k2 = CallOptions.Key.createWithDefault("k2", null);
+        CallOptions.Key<String> k3 = CallOptions.Key.createWithDefault("k3", null);
 
         CallOptions baseOptions = CallOptions.DEFAULT.withOption(k1, "FOO").withOption(k3, "BAZ");
         CallOptions defaultOptions = CallOptions.DEFAULT.withOption(k2, "BAR").withOption(k3, "BOP");
@@ -104,9 +104,9 @@ public class DefaultCallOptionsClientInterceptorTest {
 
     @Test
     public void overwriteWorksCustomKeys() {
-        CallOptions.Key<String> k1 = CallOptions.Key.of("k1", null);
-        CallOptions.Key<String> k2 = CallOptions.Key.of("k2", null);
-        CallOptions.Key<String> k3 = CallOptions.Key.of("k3", null);
+        CallOptions.Key<String> k1 = CallOptions.Key.createWithDefault("k1", null);
+        CallOptions.Key<String> k2 = CallOptions.Key.createWithDefault("k2", null);
+        CallOptions.Key<String> k3 = CallOptions.Key.createWithDefault("k3", null);
 
         CallOptions baseOptions = CallOptions.DEFAULT.withOption(k1, "FOO").withOption(k3, "BAZ");
         CallOptions defaultOptions = CallOptions.DEFAULT.withOption(k2, "BAR").withOption(k3, "BOP");
