@@ -5,7 +5,7 @@
  *  For full license text, see LICENSE.txt file in the repo root  or https://opensource.org/licenses/BSD-3-Clause
  */
 
-package com.apssouza.grpc.interceptors;
+package com.apssouza.grpc.serverinterceptors;
 
 import com.google.common.base.Stopwatch;
 
@@ -33,8 +33,9 @@ public class StopwatchServerInterceptor implements ServerInterceptor {
     ) {
         logStart(call.getMethodDescriptor());
 
-        return new ForwardingServerCallListener.SimpleForwardingServerCallListener<ReqT>(
-                next.startCall(call, headers)) {
+        ServerCall.Listener<ReqT> listener = next.startCall(call, headers);
+        return new ForwardingServerCallListener
+                .SimpleForwardingServerCallListener<ReqT>(listener) {
             private Stopwatch stopwatch = Stopwatch.createStarted();
 
             @Override

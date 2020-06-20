@@ -5,8 +5,10 @@
  *  For full license text, see LICENSE.txt file in the repo root  or https://opensource.org/licenses/BSD-3-Clause
  */
 
-package com.apssouza.grpc.interceptors;
+package com.apssouza.grpc.serverinterceptors;
 
+
+import com.apssouza.grpc.clientinterceptors.StopwatchClientInterceptor;
 
 import org.junit.Rule;
 import org.junit.Test;

@@ -9,6 +9,9 @@ import java.util.logging.Logger;
 
 import io.grpc.Server;
 
+/**
+ * gRPC server wrapper
+ */
 public class GrpcServer {
     private static Logger LOG = Logger.getLogger(GrpcServer.class.getName());
     private Server server;

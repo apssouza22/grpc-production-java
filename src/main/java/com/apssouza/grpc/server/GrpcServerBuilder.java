@@ -9,10 +9,19 @@ import io.grpc.Server;
 import io.grpc.ServerInterceptor;
 import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
 
+/**
+ * gRPC server builder
+ */
 public class GrpcServerBuilder {
 
     private NettyServerBuilder serverBuilder;
 
+    /**
+     * The port that the server will listener
+     *
+     * @param port
+     * @return
+     */
     public static GrpcServerBuilder port(int port) {
         GrpcServerBuilder grpcServerBuilder = new GrpcServerBuilder();
         grpcServerBuilder.serverBuilder = NettyServerBuilder.forPort(port);
@@ -105,7 +114,11 @@ public class GrpcServerBuilder {
         return this;
     }
 
-
+    /**
+     * Build the gRPC server
+     *
+     * @return The gRPC server wrapper
+     */
     public GrpcServer build() {
         Server server = serverBuilder.build();
         return new GrpcServer(server);

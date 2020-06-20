@@ -1,12 +1,12 @@
 package com.apssouza.grpc;
 
-import com.apssouza.grpc.interceptors.AggregateServerInterceptor;
-import com.apssouza.grpc.interceptors.CancelledRequestInterceptor;
-import com.apssouza.grpc.interceptors.StopwatchServerInterceptor;
-import com.apssouza.grpc.interceptors.UnexpectedExceptionInterceptor;
 import com.apssouza.grpc.server.GrpcServer;
 import com.apssouza.grpc.server.GrpcServerBuilder;
 import com.apssouza.grpc.server.HealthCheckService;
+import com.apssouza.grpc.serverinterceptors.AggregateServerInterceptor;
+import com.apssouza.grpc.serverinterceptors.CancelledRequestInterceptor;
+import com.apssouza.grpc.serverinterceptors.StopwatchServerInterceptor;
+import com.apssouza.grpc.serverinterceptors.UnexpectedExceptionInterceptor;
 
 import java.io.IOException;
 import java.util.ArrayList;
