@@ -1,5 +1,7 @@
 package com.apssouza.grpc.server;
 
+import com.apssouza.grpc.serverinterceptors.StopwatchServerInterceptor;
+
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Rule;
@@ -42,6 +44,7 @@ public class HealthCheckServiceTest {
                 .forName(serverName)
                 .directExecutor()
                 .addService(new HealthCheckService())
+                .intercept(new StopwatchServerInterceptor())
                 .build()
                 .start();
 

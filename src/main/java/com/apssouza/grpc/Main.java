@@ -3,7 +3,6 @@ package com.apssouza.grpc;
 import com.apssouza.grpc.server.GrpcServer;
 import com.apssouza.grpc.server.GrpcServerBuilder;
 import com.apssouza.grpc.server.HealthCheckService;
-import com.apssouza.grpc.serverinterceptors.AggregateServerInterceptor;
 import com.apssouza.grpc.serverinterceptors.CancelledRequestInterceptor;
 import com.apssouza.grpc.serverinterceptors.StopwatchServerInterceptor;
 import com.apssouza.grpc.serverinterceptors.UnexpectedExceptionInterceptor;
@@ -33,11 +32,10 @@ public class Main {
     }
 
     private static List<ServerInterceptor> getInterceptors() {
-        ServerInterceptor aggregate = new AggregateServerInterceptor(
+        return Arrays.asList(
                 new CancelledRequestInterceptor(),
                 new StopwatchServerInterceptor(),
                 new UnexpectedExceptionInterceptor()
         );
-        return Arrays.asList(aggregate);
     }
 }

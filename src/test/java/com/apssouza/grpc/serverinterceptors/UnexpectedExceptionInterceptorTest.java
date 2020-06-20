@@ -34,7 +34,9 @@ public class UnexpectedExceptionInterceptorTest {
 
     @Test
     public void noExceptionDoesNotInterfere() {
-        serverRule.getServiceRegistry().addService(ServerInterceptors.intercept(svc, interceptor));
+        serverRule.getServiceRegistry()
+                .addService(ServerInterceptors
+                        .intercept(svc, interceptor));
         HealthGrpc.HealthBlockingStub stub = HealthGrpc.newBlockingStub(serverRule.getChannel());
 
         stub.check(HealthCheckRequest.newBuilder().build());
