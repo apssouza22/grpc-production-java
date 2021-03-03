@@ -5,12 +5,16 @@
  *  For full license text, see LICENSE.txt file in the repo root  or https://opensource.org/licenses/BSD-3-Clause
  */
 
-package com.apssouza.grpc.serverinterceptor;
+package com.apssouza.grpc.server;
 
-import com.google.common.base.Preconditions;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 import io.grpc.Server;
 
@@ -18,15 +22,13 @@ import io.grpc.Server;
  * {@code Servers} provides static helper methods for working with instances of {@link Server}.
  */
 public final class ShutdownHelper {
-
-    private static Logger LOG = Logger.getLogger(ShutdownHelper.class.getName());
+    private static Logger LOG = LoggerFactory.getLogger(ShutdownHelper.class);
 
     private ShutdownHelper() {
     }
 
     /**
-     * Attempt to {@link Server#shutdown()} the {@link Server} gracefully. If the max wait time is exceeded, give up and
-     * perform a hard {@link Server#shutdownNow()}.
+     * Attempt to {@link Server#shutdown()} the {@link Server} gracefully. If the max wait time is exceeded, give up and perform a hard {@link Server#shutdownNow()}.
      *
      * @param server              the server to be shutdown
      * @param maxWaitTimeInMillis the max amount of time to wait for graceful shutdown to occur
@@ -38,8 +40,7 @@ public final class ShutdownHelper {
     }
 
     /**
-     * Attempt to {@link Server#shutdown()} the {@link Server} gracefully. If the max wait time is exceeded, give up and
-     * perform a hard {@link Server#shutdownNow()}.
+     * Attempt to {@link Server#shutdown()} the {@link Server} gracefully. If the max wait time is exceeded, give up and perform a hard {@link Server#shutdownNow()}.
      *
      * @param server  the server to be shutdown
      * @param timeout the max amount of time to wait for graceful shutdown to occur
@@ -48,13 +49,12 @@ public final class ShutdownHelper {
      * @throws InterruptedException if waiting for termination is interrupted
      */
     public static Server shutdownGracefully(Server server, long timeout, TimeUnit unit) throws InterruptedException {
-        Preconditions.checkNotNull(server, "server");
-        Preconditions.checkArgument(timeout > 0, "timeout must be greater than 0");
-        Preconditions.checkNotNull(unit, "unit");
-
-        server.shutdown();
+        checkNotNull(server, "server");
+        checkArgument(timeout > 0, "timeout must be greater than 0");
+        checkNotNull(unit, "unit");
 
         try {
+            server.shutdown();
             server.awaitTermination(timeout, unit);
         } finally {
             server.shutdownNow();
@@ -64,8 +64,7 @@ public final class ShutdownHelper {
     }
 
     /**
-     * Attempt to {@link Server#shutdown()} the {@link Server} gracefully when the JVM terminates. If the max wait time
-     * is exceeded, give up and perform a hard {@link Server#shutdownNow()}.
+     * Attempt to {@link Server#shutdown()} the {@link Server} gracefully when the JVM terminates. If the max wait time is exceeded, give up and perform a hard {@link Server#shutdownNow()}.
      *
      * @param server              the server to be shutdown
      * @param maxWaitTimeInMillis the max amount of time to wait for graceful shutdown to occur
@@ -74,13 +73,13 @@ public final class ShutdownHelper {
     public static Server shutdownWithJvm(Server server, long maxWaitTimeInMillis) {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
-                LOG.warning("gRPC server shutting down");
+                LOG.warn("gRPC server shutting down");
                 shutdownGracefully(server, maxWaitTimeInMillis);
             } catch (InterruptedException ex) {
-                // do nothing
+                LOG.error("gRPC server shutdown error.");
             }
+            LOG.warn("gRPC server shutdown success");
         }));
-
         return server;
     }
 }

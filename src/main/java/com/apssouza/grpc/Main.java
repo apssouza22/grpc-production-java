@@ -2,7 +2,6 @@ package com.apssouza.grpc;
 
 import com.apssouza.grpc.server.GrpcServer;
 import com.apssouza.grpc.server.GrpcServerBuilder;
-import com.apssouza.grpc.server.HealthCheckService;
 import com.apssouza.grpc.serverinterceptor.Factory;
 
 import java.io.IOException;
@@ -18,17 +17,16 @@ public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         List<BindableService> services = new ArrayList<>();
-        services.add(new HealthCheckService());
-        GrpcServerBuilder builder = GrpcServerBuilder.port(50051);
-        GrpcServer grpcServer = builder.services(services)
-                .fixedThreadPool(4)
-                .maxConnectionAge(5, TimeUnit.MINUTES)
-                .interceptors(getInterceptors())
+        List<ServerInterceptor> interceptors = Factory.allDefaultInterceptors();
+        GrpcServerBuilder builder = GrpcServerBuilder.port(50052);
+        GrpcServer grpcServer = builder
+                .withServices(services)
+                .withInterceptors(interceptors)
+                .withFixedThreadPool(4)
+                .withMaxConnectionAge(5, TimeUnit.MINUTES)
+                .withReflectionEnabled(true)
+                .withHealthCheck()
                 .build();
         grpcServer.start();
-    }
-
-    private static List<ServerInterceptor> getInterceptors() {
-        return Factory.allDefaultInterceptors();
     }
 }
