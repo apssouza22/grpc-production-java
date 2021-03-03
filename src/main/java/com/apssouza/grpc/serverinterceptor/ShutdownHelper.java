@@ -5,11 +5,12 @@
  *  For full license text, see LICENSE.txt file in the repo root  or https://opensource.org/licenses/BSD-3-Clause
  */
 
-package com.apssouza.grpc.utils;
+package com.apssouza.grpc.serverinterceptor;
 
 import com.google.common.base.Preconditions;
 
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import io.grpc.Server;
 
@@ -17,6 +18,8 @@ import io.grpc.Server;
  * {@code Servers} provides static helper methods for working with instances of {@link Server}.
  */
 public final class ShutdownHelper {
+
+    private static Logger LOG = Logger.getLogger(ShutdownHelper.class.getName());
 
     private ShutdownHelper() {
     }
@@ -71,6 +74,7 @@ public final class ShutdownHelper {
     public static Server shutdownWithJvm(Server server, long maxWaitTimeInMillis) {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
+                LOG.warning("gRPC server shutting down");
                 shutdownGracefully(server, maxWaitTimeInMillis);
             } catch (InterruptedException ex) {
                 // do nothing

@@ -1,7 +1,7 @@
 package com.apssouza.grpc.server;
 
 
-import com.apssouza.grpc.utils.ShutdownHelper;
+import com.apssouza.grpc.serverinterceptor.ShutdownHelper;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -28,11 +28,6 @@ public class GrpcServer {
     }
 
     private void registerShutDownListener() {
-        Runtime.getRuntime().addShutdownHook(new Thread(this::cleanup));
-    }
-
-    private void cleanup() {
-        LOG.warning("GRPC server shutting down");
         ShutdownHelper.shutdownWithJvm(this.server, Duration.ofMillis(5).toMillis());
     }
 

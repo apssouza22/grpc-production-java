@@ -5,7 +5,7 @@
  *  For full license text, see LICENSE.txt file in the repo root  or https://opensource.org/licenses/BSD-3-Clause
  */
 
-package com.apssouza.grpc.serverinterceptors;
+package com.apssouza.grpc.serverinterceptor;
 
 import com.google.common.collect.Lists;
 import static com.google.common.base.Preconditions.checkArgument;

@@ -5,7 +5,7 @@
  *  For full license text, see LICENSE.txt file in the repo root  or https://opensource.org/licenses/BSD-3-Clause
  */
 
-package com.apssouza.grpc.serverinterceptors;
+package com.apssouza.grpc.clientinterceptor;
 
 import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;

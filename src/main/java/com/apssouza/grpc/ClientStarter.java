@@ -25,9 +25,13 @@ public class ClientStarter {
                 .forAddress("localhost", 50051)
                 .usePlaintext()
                 .build();
+        HealthCheckRequest request = HealthCheckRequest.newBuilder().build();
+        HealthGrpc.HealthBlockingStub blockingStub = HealthGrpc.newBlockingStub(channel);
+        HealthCheckResponse check = blockingStub.check(request);
+        System.out.println(String.format("result %s", check.getStatus()));
 
         HealthGrpc.HealthFutureStub stub = HealthGrpc.newFutureStub(channel);
-        ListenableFuture<HealthCheckResponse> response = stub.check(HealthCheckRequest.newBuilder().build());
+        ListenableFuture<HealthCheckResponse> response = stub.check(request);
 
         final CountDownLatch latch = new CountDownLatch(1);
 

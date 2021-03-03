@@ -1,6 +1,6 @@
 package com.apssouza.grpc.server;
 
-import com.apssouza.grpc.serverinterceptors.AggregateServerInterceptor;
+import com.apssouza.grpc.serverinterceptor.AggregateServerInterceptor;
 
 import java.util.List;
 import java.util.concurrent.Executors;

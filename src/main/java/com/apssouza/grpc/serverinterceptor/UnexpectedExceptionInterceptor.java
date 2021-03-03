@@ -1,4 +1,4 @@
-package com.apssouza.grpc.serverinterceptors;
+package com.apssouza.grpc.serverinterceptor;
 
 
 import java.time.Instant;

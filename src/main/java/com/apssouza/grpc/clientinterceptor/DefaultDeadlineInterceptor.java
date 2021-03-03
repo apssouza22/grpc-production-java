@@ -5,7 +5,7 @@
  *  For full license text, see LICENSE.txt file in the repo root  or https://opensource.org/licenses/BSD-3-Clause
  */
 
-package com.apssouza.grpc.serverinterceptors;
+package com.apssouza.grpc.clientinterceptor;
 
 import com.google.common.base.Preconditions;
 
@@ -22,11 +22,10 @@ import io.grpc.ForwardingClientCall;
 import io.grpc.MethodDescriptor;
 
 /**
- * DefaultDeadlineInterceptor is used to apply a default request {@link Deadline} to all client requests when a deadline
- * is otherwise missing. If an existing deadline is found in {@link CallOptions} or the {@link Context} the explicit or
- * implicit deadline will be used instead.
+ * DefaultDeadlineInterceptor is used to apply a default request {@link Deadline} to all client requests when a deadline is otherwise missing. If an existing deadline is found in {@link CallOptions}
+ * or the {@link Context} the explicit or implicit deadline will be used instead.
  */
-public class DefaultDeadlineInterceptor implements ClientInterceptor {
+class DefaultDeadlineInterceptor implements ClientInterceptor {
     private Duration duration;
 
     public DefaultDeadlineInterceptor(Duration duration) {

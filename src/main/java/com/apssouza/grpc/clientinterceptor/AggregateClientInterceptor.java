@@ -1,11 +1,5 @@
-/*
- *  Copyright (c) 2019, Salesforce.com, Inc.
- *  All rights reserved.
- *  Licensed under the BSD 3-Clause license.
- *  For full license text, see LICENSE.txt file in the repo root  or https://opensource.org/licenses/BSD-3-Clause
- */
 
-package com.apssouza.grpc.clientinterceptors;
+package com.apssouza.grpc.clientinterceptor;
 
 import com.google.common.collect.Lists;
 import static com.google.common.base.Preconditions.checkArgument;
@@ -21,16 +15,13 @@ import io.grpc.ClientInterceptor;
 import io.grpc.MethodDescriptor;
 
 /**
- * AggregateClientInterceptor is used to bundle multiple {@link ClientInterceptor} implementations into a single {@code
- * ClientInterceptor}. Each inner {@code ClientInterceptor} is applied in order when {@link
- * AggregateClientInterceptor#interceptCall(MethodDescriptor, CallOptions, Channel)} is called.
+ * AggregateClientInterceptor is used to bundle multiple ClientInterceptor implementations into a single ClientInterceptor.
  */
-public class AggregateClientInterceptor implements ClientInterceptor {
+class AggregateClientInterceptor implements ClientInterceptor {
     private final List<ClientInterceptor> interceptors;
 
     /**
-     * Construct a AggregateClientInterceptor from one or more {@link ClientInterceptor}s. The inner {@code
-     * ClientInterceptor}s will be called in order.
+     * Construct a AggregateClientInterceptor from one or more {@link ClientInterceptor}s. The inner {@code ClientInterceptor}s will be called in order.
      *
      * @param interceptors a {@link ClientInterceptor} array
      */
@@ -39,8 +30,7 @@ public class AggregateClientInterceptor implements ClientInterceptor {
     }
 
     /**
-     * Construct a AggregateClientInterceptor from one or more {@link ClientInterceptor}s. The inner {@code
-     * ClientInterceptor}s will be called in order.
+     * Construct a AggregateClientInterceptor from one or more {@link ClientInterceptor}s. The inner {@code ClientInterceptor}s will be called in order.
      *
      * @param interceptors a {@link ClientInterceptor} list
      */

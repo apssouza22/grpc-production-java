@@ -5,10 +5,10 @@
  *  For full license text, see LICENSE.txt file in the repo root  or https://opensource.org/licenses/BSD-3-Clause
  */
 
-package com.apssouza.grpc.serverinterceptors;
+package com.apssouza.grpc.clientinterceptor;
 
 
-import com.apssouza.grpc.clientinterceptors.StopwatchClientInterceptor;
+import com.apssouza.grpc.serverinterceptor.StopwatchServerInterceptor;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -47,7 +47,7 @@ public class StopwatchInterceptorTest {
         serverRule.getServiceRegistry().addService(svc);
         HealthGrpc.HealthBlockingStub stub = HealthGrpc
                 .newBlockingStub(serverRule.getChannel())
-                .withInterceptors(new StopwatchClientInterceptor() {
+                .withInterceptors(new AuditClientInterceptor() {
                     @Override
                     protected void logStart(MethodDescriptor method) {
                         startDesc.set(method);

@@ -1,4 +1,4 @@
-package com.apssouza.grpc.serverinterceptors;
+package com.apssouza.grpc.serverinterceptor;
 
 import org.junit.Before;
 import org.junit.Rule;

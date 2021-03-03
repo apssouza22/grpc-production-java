@@ -5,7 +5,7 @@
  *  For full license text, see LICENSE.txt file in the repo root  or https://opensource.org/licenses/BSD-3-Clause
  */
 
-package com.apssouza.grpc.clientinterceptors;
+package com.apssouza.grpc.clientinterceptor;
 
 import com.google.common.base.Stopwatch;
 
@@ -24,14 +24,13 @@ import io.grpc.MethodDescriptor;
 import io.grpc.Status;
 
 /**
- * {@code StopwatchClientInterceptor} logs the beginning and end of an outbound gRPC request, along with the total
- * round-trip time.
+ * {@code StopwatchClientInterceptor} logs the beginning and end of an outbound gRPC request, along with the total round-trip time.
  *
  * <p>Typical usage would override {@link #logStart(MethodDescriptor)} and {@link #logStop(MethodDescriptor,
  * Duration)}.
  */
-public class StopwatchClientInterceptor implements ClientInterceptor {
-    private final Logger logger = Logger.getLogger(StopwatchClientInterceptor.class.getName());
+public class AuditClientInterceptor implements ClientInterceptor {
+    private final Logger logger = Logger.getLogger(AuditClientInterceptor.class.getName());
 
     @Override
     public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(

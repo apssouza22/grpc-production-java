@@ -1,6 +1,6 @@
 package com.apssouza.grpc.server;
 
-import com.apssouza.grpc.serverinterceptors.StopwatchServerInterceptor;
+import com.apssouza.grpc.serverinterceptor.StopwatchServerInterceptor;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
