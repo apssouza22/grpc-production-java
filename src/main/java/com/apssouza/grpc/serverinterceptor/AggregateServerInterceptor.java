@@ -1,9 +1,3 @@
-/*
- *  Copyright (c) 2019, Salesforce.com, Inc.
- *  All rights reserved.
- *  Licensed under the BSD 3-Clause license.
- *  For full license text, see LICENSE.txt file in the repo root  or https://opensource.org/licenses/BSD-3-Clause
- */
 
 package com.apssouza.grpc.serverinterceptor;
 
@@ -20,11 +14,10 @@ import io.grpc.ServerCallHandler;
 import io.grpc.ServerInterceptor;
 
 /**
- * AggregateClientInterceptor is used to bundle multiple {@link ServerInterceptor} implementations into a single {@code
- * ServerInterceptor}. Each inner {@code ServerInterceptor} is applied in order when {@link
- * AggregateServerInterceptor#interceptCall(ServerCall, Metadata, ServerCallHandler)} is called.
+ * AggregateClientInterceptor is used to bundle multiple interceptor implementations into a single interceptor. Each inner {@code ServerInterceptor} is applied in order when AggregateServerInterceptor
+ * is called.
  */
-public class AggregateServerInterceptor implements ServerInterceptor {
+class AggregateServerInterceptor implements ServerInterceptor {
     private final List<ServerInterceptor> interceptors;
 
     /**

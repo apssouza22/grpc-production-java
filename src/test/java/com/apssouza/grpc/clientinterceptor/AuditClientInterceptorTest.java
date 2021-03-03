@@ -8,8 +8,6 @@
 package com.apssouza.grpc.clientinterceptor;
 
 
-import com.apssouza.grpc.serverinterceptor.StopwatchServerInterceptor;
-
 import org.junit.Rule;
 import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,14 +16,13 @@ import java.time.Duration;
 import java.util.concurrent.atomic.AtomicReference;
 
 import io.grpc.MethodDescriptor;
-import io.grpc.ServerInterceptors;
 import io.grpc.health.v1.HealthCheckRequest;
 import io.grpc.health.v1.HealthCheckResponse;
 import io.grpc.health.v1.HealthGrpc;
 import io.grpc.stub.StreamObserver;
 import io.grpc.testing.GrpcServerRule;
 
-public class StopwatchInterceptorTest {
+public class AuditClientInterceptorTest {
     @Rule
     public final GrpcServerRule serverRule = new GrpcServerRule().directExecutor();
 
@@ -63,34 +60,6 @@ public class StopwatchInterceptorTest {
         stub.check(HealthCheckRequest.newBuilder().build());
 
         assertThat(startDesc.get().getFullMethodName()).contains("Check");
-        assertThat(startDesc.get().getFullMethodName()).contains("Check");
-        assertThat(stopDur.get()).isGreaterThan(Duration.ZERO);
-    }
-
-    @Test
-    public void serverStopwatchWorks() {
-        AtomicReference<MethodDescriptor> startDesc = new AtomicReference<>();
-        AtomicReference<MethodDescriptor> stopDesc = new AtomicReference<>();
-        AtomicReference<Duration> stopDur = new AtomicReference<>();
-
-        //Setup
-        serverRule.getServiceRegistry().addService(ServerInterceptors.intercept(svc,
-                new StopwatchServerInterceptor() {
-                    @Override
-                    protected void logStart(MethodDescriptor method) {
-                        startDesc.set(method);
-                    }
-
-                    @Override
-                    protected void logStop(MethodDescriptor method, Duration duration) {
-                        stopDesc.set(method);
-                        stopDur.set(duration);
-                    }
-                }));
-        HealthGrpc.HealthBlockingStub stub = HealthGrpc.newBlockingStub(serverRule.getChannel());
-
-        stub.check(HealthCheckRequest.newBuilder().build());
-
         assertThat(startDesc.get().getFullMethodName()).contains("Check");
         assertThat(stopDur.get()).isGreaterThan(Duration.ZERO);
     }

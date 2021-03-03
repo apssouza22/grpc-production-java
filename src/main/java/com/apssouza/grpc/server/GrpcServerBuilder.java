@@ -1,6 +1,6 @@
 package com.apssouza.grpc.server;
 
-import com.apssouza.grpc.serverinterceptor.AggregateServerInterceptor;
+import com.apssouza.grpc.serverinterceptor.Factory;
 
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -112,7 +112,7 @@ public class GrpcServerBuilder {
      * @return
      */
     public GrpcServerBuilder interceptors(final List<ServerInterceptor> interceptors) {
-        ServerInterceptor aggregate = new AggregateServerInterceptor(interceptors);
+        ServerInterceptor aggregate = Factory.aggregateServerInterceptor(interceptors);
         serverBuilder.intercept(aggregate);
         return this;
     }

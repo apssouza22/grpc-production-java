@@ -1,8 +1,6 @@
 package com.apssouza.grpc.server;
 
 
-import com.apssouza.grpc.serverinterceptor.ShutdownHelper;
-
 import java.io.IOException;
 import java.time.Duration;
 import java.util.logging.Logger;

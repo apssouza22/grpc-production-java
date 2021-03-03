@@ -1,8 +1,10 @@
 package com.apssouza.grpc.serverinterceptor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.Duration;
 import java.time.Instant;
-import java.util.logging.Logger;
 
 import io.grpc.Grpc;
 import io.grpc.Metadata;
@@ -16,7 +18,7 @@ import io.grpc.ServerInterceptor;
  * {@code CancelledRequestInterceptor} logs the request cancelled with the total time taken
  */
 public class CancelledRequestInterceptor implements ServerInterceptor {
-    private static Logger LOG = Logger.getLogger(CancelledRequestInterceptor.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(CancelledRequestInterceptor.class);
 
     @Override
     public <ReqT, RespT> Listener<ReqT> interceptCall(
@@ -28,7 +30,7 @@ public class CancelledRequestInterceptor implements ServerInterceptor {
         Instant start = Instant.now();
         listener = next.startCall(call, headers);
         if (call.isCancelled()) {
-            LOG.warning(String.format(
+            LOG.warn(String.format(
                     "Request cancelled after %s \n method %s \n address %s ",
                     Duration.between(start, Instant.now()).toMillis(),
                     call.getMethodDescriptor().getFullMethodName(),

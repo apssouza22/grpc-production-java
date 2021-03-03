@@ -3,13 +3,10 @@ package com.apssouza.grpc;
 import com.apssouza.grpc.server.GrpcServer;
 import com.apssouza.grpc.server.GrpcServerBuilder;
 import com.apssouza.grpc.server.HealthCheckService;
-import com.apssouza.grpc.serverinterceptor.CancelledRequestInterceptor;
-import com.apssouza.grpc.serverinterceptor.StopwatchServerInterceptor;
-import com.apssouza.grpc.serverinterceptor.UnexpectedExceptionInterceptor;
+import com.apssouza.grpc.serverinterceptor.Factory;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -32,10 +29,6 @@ public class Main {
     }
 
     private static List<ServerInterceptor> getInterceptors() {
-        return Arrays.asList(
-                new CancelledRequestInterceptor(),
-                new StopwatchServerInterceptor(),
-                new UnexpectedExceptionInterceptor()
-        );
+        return Factory.allDefaultInterceptors();
     }
 }

@@ -1,7 +1,5 @@
 package com.apssouza.grpc.server;
 
-import com.apssouza.grpc.serverinterceptor.ShutdownHelper;
-
 import org.junit.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
