@@ -1,4 +1,4 @@
-# gRPC for production
+# gRPC for production ![Build status](https://github.com/apssouza22/grpc-production-java/actions/workflows/ci.yml/badge.svg)
 
 This project abstracts away the details of the gRPC server and client configuration. 
 
