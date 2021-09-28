@@ -13,6 +13,9 @@ Here are the main features:
 - Handy Client interceptors(Timeout logs, Audit request, Default timeout...)
  
  ## Examples
+
+- /Users/alexsouza/projects/my/opensource/grpc-server-java/src/test/java/com/apssouza/grpc/Server.java
+- /Users/alexsouza/projects/my/opensource/grpc-server-java/src/test/java/com/apssouza/grpc/Client.java
  
  ```
     List<BindableService> services = new ArrayList<>();
