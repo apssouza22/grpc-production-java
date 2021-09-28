@@ -24,9 +24,9 @@ class PropHeaderClientInterceptor implements ClientInterceptor {
             @Override
             public void start(Listener<RespT> responseListener, Metadata headers) {
                 Map<String, String> headersMap = GrpcHelper.CTX_HEADERS.get();
-                headersMap.forEach((key, value) -> {
-                    headers.put(Metadata.Key.of(key, Metadata.ASCII_STRING_MARSHALLER), value);
-                });
+                if (headersMap != null) {
+                    headersMap.forEach((key, value) -> headers.put(Metadata.Key.of(key, Metadata.ASCII_STRING_MARSHALLER), value));
+                }
                 super.start(responseListener, headers);
             }
         };
